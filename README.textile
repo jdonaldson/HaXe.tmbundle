@@ -1,0 +1,3 @@
+h1.	sugar-hx
+Reorganizing the various haxe libraries I've written.
+First one is a new simple macro enabled Fast Xml parser.  It differs in that the parsing is actually done compile-time, and presented as a statically typed anonymous object.  Field completions, type matches, etc. are then possible on this object.
