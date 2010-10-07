@@ -24,4 +24,4 @@ DAMAGE.
 
 The HaXe Textmate Bundle.
 
-Documentation provided at: http://haxe.org/com/ide/textmate/sugar_hx_textmate
+Documentation provided "on the haXe wiki":http://haxe.org/com/ide/textmate/sugar_hx_textmate.
