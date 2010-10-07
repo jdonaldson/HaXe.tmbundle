@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>open_helper.rb</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>^@o</string>
+	<key>name</key>
+	<string>Open Class</string>
+	<key>output</key>
+	<string>discard</string>
+	<key>scope</key>
+	<string>source.haxe.2</string>
+	<key>uuid</key>
+	<string>2D1EE3D4-DAE4-4255-9494-50D8BC805B7D</string>
+</dict>
+</plist>

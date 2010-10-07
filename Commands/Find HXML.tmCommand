@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>saveModifiedFiles</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby
+
+require ENV['TM_BUNDLE_SUPPORT'] + '/lib/haxe_env'
+HaxeMate::get_hxml(false)
+
+
+</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>@B</string>
+	<key>name</key>
+	<string>Find/Select hxml build file</string>
+	<key>output</key>
+	<string>discard</string>
+	<key>uuid</key>
+	<string>A22B6079-8A4D-4F74-BBC9-DCB8D96EBE60</string>
+</dict>
+</plist>

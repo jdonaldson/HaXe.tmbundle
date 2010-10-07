@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby
+
+require ENV['TM_BUNDLE_SUPPORT']+'/lib/haxe_env'
+
+line_number = ENV['TM_LINE_NUMBER'].to_i
+doc = STDIN.read
+doc_a = doc.split("\n")
+next_line = doc_a[line_number].to_s
+
+class_regexp = /\b(class|interface|enum)\s+(\w+)/
+constructor_regexp = /public\s+function\s+new\s*\([^\)]+\)/
+override_regexp = /override.*function.*\(/
+method_regex = /(public|private)?\s+(static\s+)?function\s+(\w+)\s*\(/
+
+
+def scan_for_method(doc,name)
+	m_rgx = /^\s*(override\s+)?(public|private)\s+(static\s+)?function\s+#{name}\s*\(([^\)]*)\)\s*(:\s*([\w\s\-&gt;&lt;]+))?/
+	doc.scan( m_rgx )
+	returns_o = $6
+	params_o = $4 
+	if $2 != nil 
+		returns = returns_o.gsub(/\s|\n/,'') if returns_o != nil
+		params = params_o.gsub(/\s|\n/,'') if params_o != nil
+	end
+	{:params =&gt; params, :returns =&gt; returns}
+end
+
+def generate_method_doc(sig)
+	args = (sig[:params]) ? sig[:params].split(',') : []
+	puts "/**"
+	puts " *  ${1:Description}"
+	args.each { |e|
+		arg =  e.split(':')
+		puts " *	@private" if arg.length != 2 	
+		name = arg[0]
+		type = arg[1].sub(/=.*$/,'')
+		puts " *	@param #{name} #{type}"
+	}
+	puts " *	@private" if args.empty?
+	puts " *	@return #{sig[:returns]}" unless sig[:returns] == 'Void'
+	print " */"	
+end 
+
+
+
+
+t = SnippetBuilder.new
+if next_line =~ class_regexp
+	print t.class_doc($2).chomp
+elsif next_line =~ constructor_regexp
+	print t.doc("constructor").chomp
+elsif next_line =~ override_regexp
+	print t.doc("inheritDoc").chomp
+elsif next_line =~ method_regex
+	sig = scan_for_method(doc,$3)
+	generate_method_doc(sig)
+else
+	print t.doc("private").chomp
+end
+</string>
+	<key>input</key>
+	<string>document</string>
+	<key>name</key>
+	<string>Documentation for block</string>
+	<key>output</key>
+	<string>insertAsSnippet</string>
+	<key>scope</key>
+	<string>source.haxe.2</string>
+	<key>tabTrigger</key>
+	<string>doc</string>
+	<key>uuid</key>
+	<string>09BDED43-2DE9-4B1A-AD48-523DE5E51A46</string>
+</dict>
+</plist>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>saveModifiedFiles</string>
+	<key>command</key>
+	<string>field_complete.rb</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string></string>
+	<key>name</key>
+	<string>Display Field Completions</string>
+	<key>output</key>
+	<string>discard</string>
+	<key>scope</key>
+	<string>meta.scope.field-completions.haxe.2</string>
+	<key>uuid</key>
+	<string>A68122A8-95D6-41DF-8E9D-31EFEA166F5A</string>
+</dict>
+</plist>

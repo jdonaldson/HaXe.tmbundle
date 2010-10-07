@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>class ${1:${TM_FILENAME/(.*?)(\..+)/$1/}} ${2:extends ${3:Parent} }${4:implements ${5:Interface} }{
+	${6:public function new($7){
+		$8
+	\}}
+	${9:public static function main(){
+		${10}
+	\}}
+}</string>
+	<key>name</key>
+	<string>class</string>
+	<key>scope</key>
+	<string>source.haxe.2</string>
+	<key>tabTrigger</key>
+	<string>class</string>
+	<key>uuid</key>
+	<string>974F94EC-AE01-428A-ACE6-1FEABBF6AAAF</string>
+</dict>
+</plist>

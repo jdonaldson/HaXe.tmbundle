@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>-D tm-autocomplete</string>
+	<key>name</key>
+	<string>hxml bundle autocomplete indicator</string>
+	<key>scope</key>
+	<string>source.hxml</string>
+	<key>tabTrigger</key>
+	<string>auto</string>
+	<key>uuid</key>
+	<string>50A0DE0B-9C7E-4731-9668-BFA447181012</string>
+</dict>
+</plist>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>saveModifiedFiles</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby 
+require ENV['TM_BUNDLE_SUPPORT'] +"/lib/haxe_env"
+require "ftools"
+cw = ENV['TM_CURRENT_WORD']
+fp = ENV['TM_FILEPATH']
+li = ENV['TM_LINE_INDEX'].to_i
+cl = ENV['TM_CURRENT_LINE']
+pj = ENV['TM_PROJECT_DIRECTORY']
+
+
+hxml = HaxeMate::get_hxml(true,true)
+file_str = IO.read(hxml)
+haxedoc_dir = pj + "/.haxedoc"
+
+if !File.exists?(haxedoc_dir) 
+	Dir.mkdir(haxedoc_dir)
+elsif !File.directory?(haxedoc_dir)
+    TextMate.exit_show_tool_tip '.haxedoc directory cannot be created! .haxedoc exists as a file.'
+end
+
+haxedoc_build = haxedoc_dir + '/haxedoc.hxml'
+
+tmfile = File.open(haxedoc_build,'w')
+file_str.gsub(/^\s*(-cmd|-xml)\s+.*(\n|$)/, '')
+
+tmfile.write(file_str)
+tmfile.write("\n-xml .haxedoc/haxedoc.xml\n")
+tmfile.write("\n--no-output\n")
+tmfile.close
+if !File.exists?("#{pj}/.haxedoc/template.xml")
+	File.copy("#{ENV['TM_BUNDLE_SUPPORT']}/xml/template.xml","#{pj}/.haxedoc/template.xml")
+end
+Dir.chdir("#{pj}")
+if !system("haxe '#{haxedoc_build}'")
+	TextMate.exit_show_tool_tip "There is an error preventing the project compilation."
+end
+Dir.chdir("#{pj}/.haxedoc")
+if !system("haxedoc haxedoc.xml")
+	TextMate.exit_show_tool_tip "\nThere is an error preventing haxedoc creation."
+end
+
+
+TextMate.exit_show_tool_tip "\nDocs created successfully"
+
+</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>^H</string>
+	<key>name</key>
+	<string>Generate Documentation for Project</string>
+	<key>output</key>
+	<string>discard</string>
+	<key>scope</key>
+	<string>source.haxe.2</string>
+	<key>uuid</key>
+	<string>3D33A3B0-A18E-412C-A03B-811FA373E00B</string>
+</dict>
+</plist>

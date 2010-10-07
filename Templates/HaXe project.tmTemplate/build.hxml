@@ -1,0 +1,4 @@
+#build file
+-cp src
+-main ${TM_NEW_FILE_BASENAME}
+-x bin/${TM_NEW_FILE_BASENAME}.n
