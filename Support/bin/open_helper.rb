@@ -15,8 +15,9 @@ end
 
 # read in the current file and check to see if the class has already been imported or defined
 cur_file_str = STDIN.read
-if cur_file_str.match(/(class)\s*[\w\.]*#{cw}/)
-  TextMate.exit_show_tool_tip "The class #{cw} is already open"
+
+if cur_file_str.match(/class\s#{cw}/)
+  TextMate.exit_show_tool_tip "The class #{cw} is in the file that is currently open."
 end
 
 # get the hxml file to find extra defined class paths
@@ -39,6 +40,12 @@ cps.each{|dir|
   result_str =  `find #{dir} -name "*.hx" 2>/dev/null`
   result.concat(result_str.split("\n"))
 }
+
+# add in other child classes from imports
+cur_file_str.scan(/import\s+([\w\.]+)/) {|import|
+  
+}
+
 
 # build a class name => package hash
 h = Hash.new

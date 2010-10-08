@@ -15,7 +15,7 @@ end
 
 # read in the current file and check to see if the class has already been imported or defined
 cur_file_str = STDIN.read
-if cur_file_str.match(/(import|using|class)\s*[\w\.]*#{cw}/) && !cl[0,li].match('import|using')
+if cur_file_str.match(/(import|using|class)\s*((\w*?\.)*)?#{cw}\b/) && !cl[0,li].match('import|using')
   TextMate.exit_show_tool_tip "The class #{cw} has already been imported or defined"
 end
 
@@ -27,20 +27,34 @@ filestr = IO.read(hxml_build)
 
 cps = HaxeMate::get_hxml_dirs(filestr)
 
-cps.push('/usr/lib/haxe/std/') # add in default haxe lib location
+
+
+
+if ENV.key?('HAXE_LIBRARY_PATH')
+  cps.push(ENV['HAXE_LIBRARY_PATH'].gsub(/:|\./,'')) # add in the custom library path
+else
+  cps.push('/usr/lib/haxe/std/') # add in default haxe lib location
+end
+
 
 # add in specific libs from hxml
 libs = filestr.scan(/^\s*-lib\s+([\w\/]+)/)
 libs.map!{|x| x[0]}
 libs.each{|x| cps.push('/usr/lib/haxe/lib/' + x)}
 
+
+
+
 result = Array.new
 # TextMate.exit_show_tool_tip cps.join(' ')
+
 cps.each{|dir|
   
   result_str =  `find #{dir} -name "*.hx" 2>/dev/null`
   result.concat(result_str.split("\n"))
+
 }
+# TextMate.exit_show_tool_tip result.join(' ')
 
 
 # build a class name => package hash
@@ -51,8 +65,11 @@ result.each{|x|
   }
 
 
+
 # partial word match on the current word
 h.reject!{|key,value| !value.match("#{cw}") }
+
+# TextMate.exit_show_tool_tip h.keys().join(' ')
 
 TextMate.exit_show_tool_tip "No classes found that match this word"  if h.empty?
 
@@ -72,8 +89,12 @@ h.each{|key,value|
   end
   }
 
+
+
+sort_keys = packages.keys.sort()
+
 if packages.length > 1
-  selection = TextMate::UI.menu(packages.keys)
+  selection = TextMate::UI.menu(sort_keys)
   if selection == nil
     TextMate.exit_discard 
   end
@@ -81,7 +102,8 @@ else
   selection = 0
 end
 
-package = packages.keys[selection]
+
+package = sort_keys[selection]
 
 
 file_lines = cur_file_str.split("\n")

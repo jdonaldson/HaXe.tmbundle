@@ -32,11 +32,15 @@ end
 
 
 doc_bytes += li
-
 # partial word
 if cw != nil && !cl[li-1,1].match(/\.|\(/)
   partial_word = cw
-  partial_word.chop() if partial_word.match(/\(/)
+  
+  # partial_word.chop() if partial_word.match(/\(/)
+  if partial_word.match(/\((\s*)$/)
+    partial_word = partial_word.match(/\((\s*)$/)[1]
+  end
+
   doc_bytes -= partial_word.length
 end
 
@@ -48,11 +52,14 @@ execute = 'haxe "' + hxml_build + '" --display "' + fp + '@' + doc_bytes.to_s + 
 
 maybe_xml = `#{execute}`
 
+parts = maybe_xml.split(/\n[^:\n]+:\d+:[^\n]+/m)
+maybe_xml = parts[0]
+
 #try to parse the results.  If it can't be parsed, pass on the message from result 
 begin
  doc = REXML::Document.new(maybe_xml)
 rescue Exception => e
-  TextMate.exit_show_tool_tip "No completion available:\n" + result + " (couldn't parse compiler xml output) " 
+  TextMate.exit_show_tool_tip "No completion available:\n" + e + " (couldn't parse compiler xml output) " 
 end
 
 
@@ -63,12 +70,13 @@ end
 
 # helper function that converts haxe compiler --display output into an array of arguments (plus return)
 def strType2Arr (str_type)
-  args = str_type.scan(/[\?\w]+ : \([\?\(\w<\-> ]+\)|[\?\w]+ : [\w<>\.]+|\b[A-Z][\w<>\.]*|\([^\)]+\)/)
+  args = str_type.scan(/\w+\s:\s\{[^\}]+\}|[\?\w]+ : \([\?\(\w<\-> ]+\)|[\?\w]+ : [\w<>\.]+|\b[A-Z][\w<>\.]*|\([^\)]+\)/)
   # p str_type
   # p args
   # args.reject!{|n| n == '>'}
   args.map!{|n| n == 'Void' ? '' : n} # get rid of Void values
   args.map!{|n| n.sub(/[a-z]\w*\.([A-Z]+)/, '\1')} # get rid of parameterized type prefixes  
+  args.map!{|n| n.sub(/\}/,'\\\}')} # fix for parameters involving anonyomous typedefs
   return args
 end
 
@@ -130,7 +138,7 @@ def field_complete (doc,partial_word,bs)
            img_str = 'hxPackage'
          end
        elsif args.length == 1 
-         img_str = 'hxProperty'
+         img_str = 'hxField'
        else
          img_str = 'hxFunction'
        end
@@ -158,7 +166,7 @@ def field_complete (doc,partial_word,bs)
 
 
   # register small images to use in the popup
-  register = "$DIALOG images --register \"{ hxClass = '#{bs}/icons/Class.png'; hxPackage = '#{bs}/icons/Package.png'; hxProperty = '#{bs}/icons/Property.png'; hxFunction = '#{bs}/icons/Function.png';}\""
+  register = "$DIALOG images --register \"{ hxClass = '#{bs}/icons/Class.png'; hxPackage = '#{bs}/icons/Package.png'; hxField = '#{bs}/icons/Field.png'; hxFunction = '#{bs}/icons/Function.png';}\""
   `#{register}`  
 
   # call the popup command
