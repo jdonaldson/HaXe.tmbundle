@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>-D tm-autocomplete</string>
+	<string># @tm-autocomplete</string>
 	<key>name</key>
-	<string>hxml bundle autocomplete indicator</string>
+	<string>designate hxml autocompletion section</string>
 	<key>scope</key>
 	<string>source.hxml</string>
 	<key>tabTrigger</key>

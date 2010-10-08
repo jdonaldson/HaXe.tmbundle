@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>function ${1:name}($2) ${3:: Void} {
+	<string>${1:inline} ${2:private} ${3:public} ${4:static} function ${5:name}($6) ${7:: Void} {
 	$0
 }
 </string>
 	<key>name</key>
-	<string>function</string>
+	<string>method</string>
 	<key>scope</key>
 	<string>source.haxe.2</string>
 	<key>tabTrigger</key>
-	<string>fun</string>
+	<string>meth</string>
 	<key>uuid</key>
-	<string>2972591D-D946-495E-8B49-B95C7A932F8F</string>
+	<string>37493B0B-74AB-49CA-BB58-C115B98A9E82</string>
 </dict>
 </plist>
