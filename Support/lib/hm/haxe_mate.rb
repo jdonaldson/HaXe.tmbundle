@@ -276,7 +276,8 @@ module HaxeMate
       # neither
       else 
 
-        finder = "find \"#{pd}\" -name *.hxml"
+        finder = "find '#{pd}' -name '*.hxml'"
+
         hxmls = `#{finder}`.split("\n")
         hxmls.map!{|n| n.slice!(pd.length+1,n.length)}
         hxmls.reject!{|n| n.match(/\.tm-autocomplete.hxml/)}
