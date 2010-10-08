@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>-main $1
+-cp $3
+-neko bin/$1.n
+#-cmd neko bin/$1.n
+</string>
+	<key>name</key>
+	<string>neko hxml</string>
+	<key>scope</key>
+	<string>source.hxml</string>
+	<key>tabTrigger</key>
+	<string>neko</string>
+	<key>uuid</key>
+	<string>173F13B2-8629-4024-B6DA-625B37CC86AC</string>
+</dict>
+</plist>

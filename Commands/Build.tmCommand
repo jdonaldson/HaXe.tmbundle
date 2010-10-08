@@ -5,91 +5,7 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>#!/usr/bin/env ruby -wKU -W0
-require ENV["TM_SUPPORT_PATH"] + "/lib/tm/executor"
-require ENV["TM_SUPPORT_PATH"] + "/lib/tm/save_current_document"
-require ENV['TM_BUNDLE_SUPPORT'] +'/lib/haxe_env'
-require 'uri'
-
-pd = ENV['TM_PROJECT_DIRECTORY']
-if pd == nil || !File.exists?(pd) || !File.directory?(pd)
-	TextMate.exit_show_tool_tip "Project Directory does not exist.\nPlease run the compile command from a HaXe project."
-end
-Dir.chdir(ENV['TM_PROJECT_DIRECTORY'])
-hxml_build = HaxeMate::get_hxml()
-
-TextMate.save_current_document
-cmp_err = false
-TextMate::Executor.run('haxe', hxml_build) do |str, type|
-  case type
-  when :err
-	line_err = str.match(/([\/\w\.]+):(\d+): (characters|lines) (\d+)/)
-     if line_err
-        cmp_err = true
-	   url_loc = ENV['TM_PROJECT_DIRECTORY'] + '/' + line_err[1] + '&amp;line='+ line_err[2] + '&amp;column=' + (line_err[4].to_i+1).to_s
-	   url_loc = URI.escape(url_loc)	
-    	   str =  "&lt;span class=\"stderr\"&gt;&lt;a href=txmt://open/?url=file://#{url_loc}&gt;#{htmlize(str)}&lt;/a&gt;&lt;/span&gt;"     
-     else
-        str
-     end 	  
-  end
-
-end
-
-Process.exit if cmp_err
-
-file_str = IO.read(hxml_build)
-
-# output js traces here
-matches = file_str.scan(/^\s*-js?\s+([\w+\.\/]+)/)
-if matches.length &gt; 0
-
-
-    print &lt;&lt;JS1
-    &lt;div id = "tm_webpreview_content"&gt;
-      &lt;div class="executor"&gt;
-        &lt;pre&gt;
-            &lt;div id="_executor_output"&gt;
-			&lt;h3&gt;JS Div &lt;/h3&gt;
-
-			&lt;div id='haxe:trace'&gt;&lt;/div&gt;
-JS1
-  matches.each{|x|
-    js_file = "#{ENV['TM_PROJECT_DIRECTORY']}/#{x}"
-    print "&lt;h3&gt;JS Output: &lt;a href=file://#{js_file}&gt;#{js_file}&lt;/a&gt;&lt;/h3&gt;"
-    print "&lt;script language='javascript' src='file://#{js_file}'&gt;&lt;/script&gt;"
-}
-print &lt;&lt;JS2
-		 &lt;/div&gt;
-        &lt;/pre&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-JS2
-
-  
-end
-
-# output swf traces here
-matches = file_str.scan(/^\s*-swf9?\s+([\w+\.\/]+)/)
-matches.each{|x|
-  swf_file = "#{ENV['TM_PROJECT_DIRECTORY']}/#{x}"
-  print &lt;&lt;SWF
-  &lt;div id = "tm_webpreview_content"&gt;
-    &lt;div class="executor"&gt;
-      &lt;pre&gt;
-          &lt;div id="_executor_output"&gt;
-              &lt;h3&gt;SWF Output: &lt;a href=file://#{swf_file}&gt;#{swf_file}&lt;/a&gt;&lt;/h3&gt;
-              &lt;embed src="file://#{swf_file}" width="550" height="400"&gt;&lt;/embed&gt;
-          &lt;/div&gt;
-      &lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-SWF
-}
-
-
-
-
+	<string>build.rb
 </string>
 	<key>input</key>
 	<string>document</string>
@@ -100,7 +16,7 @@ SWF
 	<key>output</key>
 	<string>showAsHTML</string>
 	<key>scope</key>
-	<string>source.haxe.2</string>
+	<string>source.haxe.2, source.hxml</string>
 	<key>uuid</key>
 	<string>14FFB41F-507E-4791-BAC9-62E505214C76</string>
 </dict>

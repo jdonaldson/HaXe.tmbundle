@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>trace("$1: " + Std.string($1)); </string>
+	<key>name</key>
+	<string>descriptive trace</string>
+	<key>scope</key>
+	<string>source.haxe.2</string>
+	<key>tabTrigger</key>
+	<string>desc</string>
+	<key>uuid</key>
+	<string>6E70511E-B0CC-44D9-B379-141533B08EA3</string>
+</dict>
+</plist>

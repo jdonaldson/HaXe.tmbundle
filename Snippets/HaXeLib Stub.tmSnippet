@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>&lt;project name="${1:myproject}" url="${2:http://myproject.org}" license="${3:GPL}"&gt;
+    &lt;user name="${4:mylogin}"/&gt;
+    ${5:&lt;tag v="${6:flash}"/&gt;}
+    &lt;description&gt;${7:This project is an example of an haxelib project}&lt;/description&gt;
+    &lt;version name="0.1"&gt;${8:Initial release, everything is working correctly}&lt;/version&gt;
+&lt;/project&gt;</string>
+	<key>name</key>
+	<string>HaXeLib Stub</string>
+	<key>scope</key>
+	<string>text.xml</string>
+	<key>tabTrigger</key>
+	<string>haxelib</string>
+	<key>uuid</key>
+	<string>2451CBE3-82E1-4E6B-B98B-27FCAD72716C</string>
+</dict>
+</plist>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>
+# swf 8
+-main $1
+-cp $2
+-swf bin/$1.8.swf
+
+--next
+
+# swf 9
+-main $1
+-cp $2
+-swf9 bin/$1.9.swf
+
+--next
+
+# js
+-main $1
+-cp $2
+-js bin/$1.js
+
+--next
+
+# php
+-main $1
+-cp $2
+-php bin/$1
+-cmd echo "==========&lt;PHP&gt;=========="
+-cmd php bin/$1/index.php
+-cmd echo "==========&lt;/PHP&gt;=========="
+
+--next
+
+# neko
+-main $1
+-cp $2
+-neko bin/$1.n
+-cmd echo "==========&lt;NEKO&gt;=========="
+-cmd neko bin/$1.n
+-cmd echo "==========&lt;/NEKO&gt;=========="
+
+--next 
+
+# cpp
+-main $1
+-cp $2
+-cpp bin/$1
+-cmd echo "==========&lt;CPP&gt;=========="
+-cmd bin/$1/$1
+-cmd echo "==========&lt;/CPP&gt;=========="
+
+
+# @tm-preview</string>
+	<key>name</key>
+	<string>all targets hxml</string>
+	<key>scope</key>
+	<string>source.hxml</string>
+	<key>tabTrigger</key>
+	<string>all</string>
+	<key>uuid</key>
+	<string>72C80B72-F647-45EA-96E1-C51C9B3BB4F6</string>
+</dict>
+</plist>

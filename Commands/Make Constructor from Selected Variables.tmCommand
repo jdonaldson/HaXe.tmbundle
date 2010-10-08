@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby
+require ENV["TM_SUPPORT_PATH"] + "/lib/tm/save_current_document"
+sel = ENV['TM_SELECTED_TEXT']
+variables = sel.split(/\n/)
+variables.map!{|x| x.gsub!(/var|;|public|private|\/\/.*|\s+/,'')}
+output = "\n\n\tpublic function new( #{variables.join(', ')} ){\n#{variables.map{|x| "\t\tthis.#{x.gsub(/:.+/,'')} = #{x.gsub(/:.+/,'')};"}.join("\n")}\n\t}"
+
+print output
+</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>^m</string>
+	<key>name</key>
+	<string>Make Constructor from Selected Variables</string>
+	<key>output</key>
+	<string>afterSelectedText</string>
+	<key>scope</key>
+	<string>source.haxe.2</string>
+	<key>uuid</key>
+	<string>6B91F7A4-F057-4091-BA07-BA3C835CA10C</string>
+</dict>
+</plist>

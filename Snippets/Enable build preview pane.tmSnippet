@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string># @tm-preview</string>
+	<key>name</key>
+	<string>enable build preview in html</string>
+	<key>scope</key>
+	<string>source.hxml</string>
+	<key>tabTrigger</key>
+	<string>pre</string>
+	<key>uuid</key>
+	<string>746D0CE0-286F-4FE9-9273-1A1CB9E78E8C</string>
+</dict>
+</plist>

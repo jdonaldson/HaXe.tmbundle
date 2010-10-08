@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>for ($1 in $2){
+	$3
+}
+
+</string>
+	<key>name</key>
+	<string>for</string>
+	<key>scope</key>
+	<string>source.haxe.2</string>
+	<key>tabTrigger</key>
+	<string>for</string>
+	<key>uuid</key>
+	<string>85A9242C-CD99-4BC2-8A5B-0CD6A7FDAB81</string>
+</dict>
+</plist>

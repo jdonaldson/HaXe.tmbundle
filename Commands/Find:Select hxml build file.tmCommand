@@ -3,20 +3,24 @@
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
-	<string>nop</string>
+	<string>saveModifiedFiles</string>
 	<key>command</key>
-	<string>open_helper.rb</string>
+	<string>#!/usr/bin/env ruby
+
+require ENV['TM_BUNDLE_SUPPORT'] + '/lib/haxe_env'
+HaxeMate::get_hxml(false)
+
+
+</string>
 	<key>input</key>
-	<string>document</string>
+	<string>selection</string>
 	<key>keyEquivalent</key>
-	<string>^@o</string>
+	<string>@B</string>
 	<key>name</key>
-	<string>Open Class</string>
+	<string>Find/Select hxml build file</string>
 	<key>output</key>
 	<string>discard</string>
-	<key>scope</key>
-	<string>source.haxe.2</string>
 	<key>uuid</key>
-	<string>2D1EE3D4-DAE4-4255-9494-50D8BC805B7D</string>
+	<string>A22B6079-8A4D-4F74-BBC9-DCB8D96EBE60</string>
 </dict>
 </plist>

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
-	<string>nop</string>
+	<string>saveModifiedFiles</string>
 	<key>command</key>
 	<string>#!/usr/bin/env ruby 
 require ENV['TM_BUNDLE_SUPPORT'] +"/lib/haxe_env"
@@ -14,7 +14,8 @@ li = ENV['TM_LINE_INDEX'].to_i
 cl = ENV['TM_CURRENT_LINE']
 pj = ENV['TM_PROJECT_DIRECTORY']
 
-
+chxdoc =  ENV['TM_BUNDLE_SUPPORT'] +"/ext/chxdoc"
+chxdoc.gsub!(' ', '\ ')
 hxml = HaxeMate::get_hxml(true,true)
 file_str = IO.read(hxml)
 haxedoc_dir = pj + "/.haxedoc"
@@ -34,15 +35,19 @@ tmfile.write(file_str)
 tmfile.write("\n-xml .haxedoc/haxedoc.xml\n")
 tmfile.write("\n--no-output\n")
 tmfile.close
-if !File.exists?("#{pj}/.haxedoc/template.xml")
-	File.copy("#{ENV['TM_BUNDLE_SUPPORT']}/xml/template.xml","#{pj}/.haxedoc/template.xml")
+
+
+if !File.exists?("#{pj}/.haxedoc/templates")
+	FileUtils.cp_r("#{ENV['TM_BUNDLE_SUPPORT']}/ext/templates","#{pj}/.haxedoc/templates")
 end
+
+
 Dir.chdir("#{pj}")
 if !system("haxe '#{haxedoc_build}'")
 	TextMate.exit_show_tool_tip "There is an error preventing the project compilation."
 end
 Dir.chdir("#{pj}/.haxedoc")
-if !system("haxedoc haxedoc.xml")
+if !system("#{chxdoc}/chxdoc --stylesheet=../templates/default/stylesheet.css --developer=true --showAuthorTags=true haxedoc.xml ")
 	TextMate.exit_show_tool_tip "\nThere is an error preventing haxedoc creation."
 end
 
@@ -51,16 +56,16 @@ TextMate.exit_show_tool_tip "\nDocs created successfully"
 
 </string>
 	<key>input</key>
-	<string>selection</string>
+	<string>none</string>
 	<key>keyEquivalent</key>
 	<string>^H</string>
 	<key>name</key>
-	<string>Generate Documentation for Project</string>
+	<string>Generate Documentation for Project (chxdoc-test)</string>
 	<key>output</key>
-	<string>replaceSelectedText</string>
+	<string>showAsTooltip</string>
 	<key>scope</key>
-	<string>source.haxe.2</string>
+	<string>source.haxe.3</string>
 	<key>uuid</key>
-	<string>9E1DE4FF-4BA6-424F-BD8C-043046AC474F</string>
+	<string>3D33A3B0-A18E-412C-A03B-811FA373E00B</string>
 </dict>
 </plist>
