@@ -38,13 +38,13 @@ def generate_method_doc(sig)
 	puts " *  ${1:Description}"
 	args.each { |e|
 		arg =  e.split(':')
-		puts " *	@private" if arg.length != 2 	
+		puts " *	[private]" if arg.length != 2 	
 		name = arg[0]
 		type = arg[1].sub(/=.*$/,'')
-		puts " *	@param #{name} #{type}"
+		puts " *	[param] #{name} #{type}"
 	}
-	puts " *	@private" if args.empty?
-	puts " *	@return #{sig[:returns]}" unless sig[:returns] == 'Void'
+	puts " *	[private]" if args.empty?
+	puts " *	[return] #{sig[:returns]}" unless sig[:returns] == 'Void'
 	print " */"	
 end 
 
@@ -53,29 +53,29 @@ end
 
 t = SnippetBuilder.new
 if next_line =~ class_regexp
-	print t.class_doc($2).chomp
+	print t.class_doc_hx($2).chomp
 elsif next_line =~ constructor_regexp
-	print t.doc("constructor").chomp
+	print t.doc_hx("constructor").chomp
 elsif next_line =~ override_regexp
-	print t.doc("inheritDoc").chomp
+	print t.doc_hx("inheritDoc").chomp
 elsif next_line =~ method_regex
 	sig = scan_for_method(doc,$3)
-	generate_method_doc(sig)
+	generate_method_doc_hx(sig)
 else
-	print t.doc("private").chomp
+	print t.doc_hx("private").chomp
 end
 </string>
 	<key>input</key>
 	<string>document</string>
 	<key>name</key>
-	<string>javadoc for current block</string>
+	<string>haxedoc for current block</string>
 	<key>output</key>
 	<string>insertAsSnippet</string>
 	<key>scope</key>
 	<string>source.haxe.2</string>
 	<key>tabTrigger</key>
-	<string>jdoc</string>
+	<string>doc</string>
 	<key>uuid</key>
-	<string>09BDED43-2DE9-4B1A-AD48-523DE5E51A46</string>
+	<string>27CB0305-FD8A-4518-99AE-D7B1847B5061</string>
 </dict>
 </plist>

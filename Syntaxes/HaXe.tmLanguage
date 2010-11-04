@@ -249,7 +249,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>\b(function)\s+([A-Za-z]\w*)[&lt;\w&gt;,]*\s*\(</string>
+					<string>\b(function)\s+([_A-Za-z]\w*)[&lt;\w&gt;,]*\s*\(</string>
 				</dict>
 			</array>
 		</dict>

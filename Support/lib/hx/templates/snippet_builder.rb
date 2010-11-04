@@ -23,6 +23,17 @@ class SnippetBuilder
 	# = HXDoc =
 	# =========
 	
+	def doc_hx(tag,check_doc=false)
+
+		return "" if check_doc && include_docs == false
+
+		b = binding
+		d = File.read(@t.doc_hx)
+		t = ERB.new(d)
+		t.result b
+
+	end
+	
 	def doc(tag,check_doc=false)
 
 		return "" if check_doc && include_docs == false
@@ -33,16 +44,35 @@ class SnippetBuilder
 		t.result b
 
 	end
+	
+	
 
 	def class_doc(class_name = '', check_doc=false)
 
 		return "" if check_doc && include_docs == false
     
 		full_name = ENV['TM_FULLNAME']
+		email = ENV['TM_EMAIL']
+		
     # date = `date +%d.%m.%Y`.chop
     date = Date.today.to_s
 		b = binding
 		d	= File.read(@t.class_doc)
+		t = ERB.new(d)
+		t.result b
+
+	end
+	
+	def class_doc_hx(class_name = '', check_doc=false)
+
+		return "" if check_doc && include_docs == false
+    
+		full_name = ENV['TM_FULLNAME']
+		email = ENV['TM_EMAIL']
+    # date = `date +%d.%m.%Y`.chop
+    date = Date.today.to_s
+		b = binding
+		d	= File.read(@t.class_doc_hx)
 		t = ERB.new(d)
 		t.result b
 

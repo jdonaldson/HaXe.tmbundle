@@ -3,16 +3,18 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>/**
- *  $0
- **/</string>
+	<string>@:macro class ${1:${TM_FILENAME/(.*?)(\..+)/$1/}}}{
+	${2:public static function main(){
+		${3}
+	\}}
+}</string>
 	<key>name</key>
-	<string>javadoc block comment</string>
+	<string>macro class</string>
 	<key>scope</key>
 	<string>source.haxe.2</string>
 	<key>tabTrigger</key>
-	<string>/**</string>
+	<string>macro</string>
 	<key>uuid</key>
-	<string>E9C94B78-4A11-4FBA-A567-CE8E427C00BC</string>
+	<string>56CFF99A-B1EC-4E8A-A5E9-0C224C092998</string>
 </dict>
 </plist>

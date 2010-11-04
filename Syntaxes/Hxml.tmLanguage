@@ -14,7 +14,7 @@
 	<array>
 		<dict>
 			<key>match</key>
-			<string>(-cp|-js|-as3|-swf-header|-swf-version|swf-lib|-swf9|-swf|-neko|-php|-xml|-x|-main|-lib|-D|-resource|-exclude|-v|-debug|-prompt|-cmd|--flash-strict|--no-traces|--flash-use-stage|--neko-source|--gen-hx-classes|--next|--display|--no-output|--times|--no-inline|--no-opt|--php-front|--remap|-help|--help)</string>
+			<string>(-cpp?|-js|-as3|-swf-header|-swf-version|swf-lib|-swf9|-swf|-neko|-php|-xml|-x|-main|-lib|-D|-resource|-exclude|-v|-debug|-prompt|-cmd|--flash-strict|--no-traces|--flash-use-stage|--neko-source|--gen-hx-classes|--next|--display|--no-output|--times|--no-inline|--no-opt|--php-front|--remap|-help|--help)</string>
 			<key>name</key>
 			<string>keyword.other.hxml</string>
 		</dict>

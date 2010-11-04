@@ -3,16 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>/**
- *  $0
- **/</string>
+	<string>@:macro public static function ${1:name}(${2:e:haxe.macro.Expr}) : haxe.macro.Expr {
+	$0
+}
+</string>
 	<key>name</key>
-	<string>javadoc block comment</string>
+	<string>macro function</string>
 	<key>scope</key>
 	<string>source.haxe.2</string>
 	<key>tabTrigger</key>
-	<string>/**</string>
+	<string>macro</string>
 	<key>uuid</key>
-	<string>E9C94B78-4A11-4FBA-A567-CE8E427C00BC</string>
+	<string>8669F9EC-5B4E-47A9-9CE7-2A5F346CD420</string>
 </dict>
 </plist>

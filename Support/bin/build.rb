@@ -143,7 +143,11 @@ end
 # output swf traces here
 matches = file_str.scan(/^\s*-swf9?\s+([\w+\.\/]+)/)
 matches.each{|x|
-  swf_file = "#{ENV['TM_PROJECT_DIRECTORY']}/#{x}"
+  if (x[0].match(/^\//))
+    swf_file = x[0]
+  else
+    swf_file = "#{ENV['TM_PROJECT_DIRECTORY']}/#{x[0]}"
+  end
   print <<SWF
   <div id = "tm_webpreview_content">
     <div class="executor">

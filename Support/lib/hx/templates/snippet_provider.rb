@@ -11,8 +11,10 @@ class SnippetProvider
 
 	attr_reader :class
 	attr_reader :class_doc
+	attr_reader :class_doc_hx
 	attr_reader :const
 	attr_reader :doc
+	attr_reader :doc_hx
 	attr_reader :get
 	attr_reader :interface
 	attr_reader :i_get
@@ -31,7 +33,9 @@ class SnippetProvider
 
 		@class      = bp+'class.erb'
 		@class_doc  = bp+'class_doc.erb'
+		@class_doc_hx  = bp+'class_doc_hx.erb'
 		@doc        = bp+'doc.erb'
+		@doc_hx        = bp+'doc_hx.erb'
 		@get        = bp+'get.erb'
 		@interface  = bp+'interface.erb'
 		@i_get      = bp+'i_get.erb'
