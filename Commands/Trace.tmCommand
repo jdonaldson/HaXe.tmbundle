@@ -6,9 +6,12 @@
 	<string>nop</string>
 	<key>command</key>
 	<string>#!/usr/bin/env ruby 
-print "trace(#{ARGF.read});"</string>
+exprs = ARGF.read
+exprs.sub!(/^(\s*)([^;]*)/,'\1trace(\2)')
+
+print exprs +"$0"</string>
 	<key>fallbackInput</key>
-	<string>word</string>
+	<string>line</string>
 	<key>input</key>
 	<string>selection</string>
 	<key>keyEquivalent</key>
@@ -16,7 +19,7 @@ print "trace(#{ARGF.read});"</string>
 	<key>name</key>
 	<string>Trace</string>
 	<key>output</key>
-	<string>replaceSelectedText</string>
+	<string>insertAsSnippet</string>
 	<key>scope</key>
 	<string>source.haxe.2</string>
 	<key>uuid</key>

@@ -49,11 +49,11 @@ hxml_build = HaxeMate::get_hxml(true, true)
 Dir.chdir(pj)
 # call the haxe --display function
 execute = 'haxe "' + hxml_build + '" --display "' + fp + '@' + doc_bytes.to_s + '" 2>&1'
-
+# TextMate.exit_create_new_document execute
 maybe_xml = `#{execute}`
 
-parts = maybe_xml.split(/\n[^:\n]+:\d+:[^\n]+/m)
-maybe_xml = parts[0]
+# parts = maybe_xml.split(/\n[^:\n]+:\d+:[^\n]+/m)
+# maybe_xml = parts[0]
 
 #try to parse the results.  If it can't be parsed, pass on the message from result 
 begin
@@ -64,16 +64,12 @@ end
 
 
 if doc.elements['list'] == nil && doc.elements['type'] == nil 
-  
   TextMate.exit_show_tool_tip "There is an error preventing autocompletion: \n" + maybe_xml
 end 
 
 # helper function that converts haxe compiler --display output into an array of arguments (plus return)
 def strType2Arr (str_type)
   args = str_type.scan(/\w+\s:\s\{[^\}]+\}|[\?\w]+ : \([\?\(\w<\-> ]+\)|[\?\w]+ : [\w<>\.]+|\b[A-Z][\w<>\.]*|\([^\)]+\)/)
-  # p str_type
-  # p args
-  # args.reject!{|n| n == '>'}
   args.map!{|n| n == 'Void' ? '' : n} # get rid of Void values
   args.map!{|n| n.sub(/[a-z]\w*\.([A-Z]+)/, '\1')} # get rid of parameterized type prefixes  
   args.map!{|n| n.sub(/\}/,'\\\}')} # fix for parameters involving anonyomous typedefs
@@ -163,8 +159,6 @@ def field_complete (doc,partial_word,bs)
   end
   TextMate.exit_show_tool_tip('No fields match the partial field given.') if results.length == 0
 
-
-
   # register small images to use in the popup
   register = "$DIALOG images --register \"{ hxClass = '#{bs}/icons/Class.png'; hxPackage = '#{bs}/icons/Package.png'; hxField = '#{bs}/icons/Field.png'; hxFunction = '#{bs}/icons/Function.png';}\""
   `#{register}`  
@@ -178,12 +172,22 @@ def function_complete (doc)
   doc.elements.each('type') do |element|
      args = strType2Arr(element.text.strip)
      TextMate.exit_insert_snippet( args2Snippet(args,false))
-  end
-  
+  end  
 end
 
-doc.elements['list'] != nil ? field_complete(doc,partial_word,bs) : function_complete(doc)
 
+if ARGV[0] ==  'enum' 
+  if doc.elements['list'] == nil
+    TextMate.exit_show_tool_tip('Can\'t provide enum construction for functions.') if results.length == 0  
+  end
+  doc.elements.each("list/i") do |element| # parse the xml document of possible fields
+    p element.attributes['n']
+    p element.elements['t'].to_s
+  end
+
+else
+ doc.elements['list'] != nil ? field_complete(doc,partial_word,bs) : function_complete(doc)
+end
 
 
 
