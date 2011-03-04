@@ -44,26 +44,29 @@ jscript
 
 err_num = 0
 TextMate::Executor.run('haxe', hxml_build) do |str, type|
+  
+
   case type
   when :err
-	line_err = str.match(/([\/\w\.\-]+):(\d+): (characters|lines) (\d+)/)
-     if line_err
-
-        if line_err[1].match(/^\//)
-	        url_loc =  line_err[1] + '&line='+ line_err[2] + '&column=' + (line_err[4].to_i+1).to_s
-	      else
-	        url_loc = ENV['TM_PROJECT_DIRECTORY'] + '/' + line_err[1] + '&line='+ line_err[2] + '&column=' + (line_err[4].to_i+1).to_s
-	      end
-	      url_loc = URI.escape(url_loc)	
-    	  str =  "<span class=\"stderr\" id=\"err#{err_num+=1}\"><a href=txmt://open/?url=file://#{url_loc}>#{htmlize(str)}</a></span>"
-    	  if err_num == 1
-          str = javascript + str
-        end
-        str     
-     else
-        str
-     end 	  
+    line_err = str.match(/([\/\w\.\-]+):(\d+): (characters|lines) (\d+)/)
+    if line_err
+  
+      if line_err[1].match(/^\//)
+        url_loc =  line_err[1] + '&line='+ line_err[2] + '&column=' + (line_err[4].to_i+1).to_s
+      else
+        url_loc = ENV['TM_PROJECT_DIRECTORY'] + '/' + line_err[1] + '&line='+ line_err[2] + '&column=' + (line_err[4].to_i+1).to_s
+      end
+      url_loc = URI.escape(url_loc) 
+      str =  "<span class=\"stderr\" id=\"err#{err_num+=1}\"><a href=txmt://open/?url=file://#{url_loc}>#{htmlize(str)}</a></span>"
+      if err_num == 1
+        str = javascript + str
+      end
+    end
+  else
+    str.sub!(/(http:\/\/[\w:]+)/, "<a href=\"javascript:TextMate.system('open \\1')\">\\1</a>")
+    str = "<div>#{str}</div>"
   end
+
 
 end
 
@@ -72,7 +75,7 @@ print <<HXML
 
 <pre>
 <h3>Executed HXML</h3>
-#{CGI.escapeHTML(file_str)}
+# {CGI.escapeHTML(file_str)}
 </pre>
 </div>
 HXML
