@@ -75,7 +75,7 @@ print <<HXML
 
 <pre>
 <h3>Executed HXML</h3>
-# {CGI.escapeHTML(file_str)}
+#{CGI.escapeHTML(file_str)}
 </pre>
 </div>
 HXML
