@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>trace("$1: " + Std.string($1)); </string>
+	<string>trace(Std.string($1) + " was the value for $1"); </string>
 	<key>name</key>
 	<string>descriptive trace</string>
 	<key>scope</key>
