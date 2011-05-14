@@ -264,6 +264,10 @@
 					<key>include</key>
 					<string>#rules</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#variable-setting</string>
+				</dict>
 			</array>
 		</dict>
 		<key>property_name</key>
@@ -685,15 +689,20 @@
 		<key>variable_setting</key>
 		<dict>
 			<key>begin</key>
-			<string>([\w\-]+)\s{0,}(=)</string>
+			<string>(var)\s*([\w\-]+)\s{0,}(=)</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>variable</string>
+					<string>keyword.other.variable.hss.1</string>
 				</dict>
 				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable</string>
+				</dict>
+				<key>3</key>
 				<dict>
 					<key>name</key>
 					<string>punctuation</string>
@@ -716,6 +725,10 @@
 				<dict>
 					<key>include</key>
 					<string>#variable</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#variable_setting</string>
 				</dict>
 			</array>
 		</dict>
