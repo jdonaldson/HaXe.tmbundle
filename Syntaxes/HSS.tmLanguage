@@ -242,6 +242,13 @@
 				</dict>
 			</array>
 		</dict>
+		<key>invalid_var_scope</key>
+		<dict>
+			<key>match</key>
+			<string>\bvar\b</string>
+			<key>name</key>
+			<string>invalid.illegal</string>
+		</dict>
 		<key>property_list</key>
 		<dict>
 			<key>begin</key>
@@ -262,11 +269,11 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#rules</string>
+					<string>#variable_setting</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#variable-setting</string>
+					<string>#rules</string>
 				</dict>
 			</array>
 		</dict>
@@ -709,7 +716,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>\n|(?&lt;=\})</string>
+			<string>;|(?&lt;=\})</string>
 			<key>name</key>
 			<string>meta.set.variable</string>
 			<key>patterns</key>
@@ -728,7 +735,7 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#variable_setting</string>
+					<string>#invalid_var_scope</string>
 				</dict>
 			</array>
 		</dict>
