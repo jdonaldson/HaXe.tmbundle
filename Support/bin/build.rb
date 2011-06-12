@@ -43,14 +43,13 @@ jscript
 
 
 err_num = 0
+
 TextMate::Executor.run('haxe', hxml_build) do |str, type|
-  
 
   case type
   when :err
-    line_err = str.match(/([\/\w\.\-]+):(\d+): (characters|lines) (\d+)/)
-    if line_err
-  
+    line_err = str.match(/([\/\w\.\-]+):(\d+): (characters|lines) (\d+)/)    
+    if line_err  
       if line_err[1].match(/^\//)
         url_loc =  line_err[1] + '&line='+ line_err[2] + '&column=' + (line_err[4].to_i+1).to_s
       else
@@ -66,10 +65,11 @@ TextMate::Executor.run('haxe', hxml_build) do |str, type|
     str.sub!(/(http:\/\/[\w:]+)/, "<a href=\"javascript:TextMate.system('open \\1')\">\\1</a>")
     str = "<div>#{str}</div>"
   end
-
-
+  str
 end
 
+
+exit
 print <<HXML
 <div id = "tm_webpreview_content">
 
