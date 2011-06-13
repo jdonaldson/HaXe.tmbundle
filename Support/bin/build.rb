@@ -69,7 +69,6 @@ TextMate::Executor.run('haxe', hxml_build) do |str, type|
 end
 
 
-exit
 print <<HXML
 <div id = "tm_webpreview_content">
 
