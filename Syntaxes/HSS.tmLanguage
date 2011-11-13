@@ -145,7 +145,11 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#mixin_attributes</string>
+					<string>#string_single</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#string_double</string>
 				</dict>
 			</array>
 		</dict>
@@ -277,6 +281,7 @@
 				</dict>
 			</array>
 		</dict>
+		
 		<key>property_name</key>
 		<dict>
 			<key>comment</key>
