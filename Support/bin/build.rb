@@ -110,8 +110,6 @@ end
 # output js traces here
 matches = file_str.scan(/^\s*-js?\s+([\w+\.\/]+)/)
 if matches.length > 0
-
-
     print <<JS1
     <div id = "tm_webpreview_content">
       <div class="executor">
@@ -121,8 +119,11 @@ if matches.length > 0
 
 			<div id='haxe:trace'></div>
 JS1
-  matches.each{|x|
+
+matches.flatten!
+matches.each{|x|
     js_file = "#{ENV['TM_PROJECT_DIRECTORY']}/#{x}"
+
     print "<h3>JS File Location: <a href=file://#{js_file}>#{js_file}</a></h3>"
     print "<script language='javascript' src='file://#{js_file}'></script>"
 }

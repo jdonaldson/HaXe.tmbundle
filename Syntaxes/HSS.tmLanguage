@@ -52,6 +52,10 @@
 			<key>include</key>
 			<string>#property_list</string>
 		</dict>
+		<dict>
+			<key>include</key>
+			<string>#css_function</string>
+		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
@@ -141,11 +145,15 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#general</string>
+					<string>#string_single</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#mixin_attributes</string>
+					<string>#string_double</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#general</string>
 				</dict>
 			</array>
 		</dict>
@@ -205,6 +213,26 @@
 			<string>(?&lt;=[\d])(px|pt|cm|mm|in|em|ex|pc)\b|%</string>
 			<key>name</key>
 			<string>keyword.other.unit.css</string>
+		</dict>
+		<key>css_function</key>
+		<dict>
+			<key>begin</key>
+			<string>CSS\(</string>
+			<key>end</key>
+			<string>\)</string>
+			<key>name</key>
+			<string>css.literal.function.hss</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#string_single</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#string_double</string>
+				</dict>
+			</array>
 		</dict>
 		<key>general</key>
 		<dict>
@@ -320,6 +348,10 @@
 				<dict>
 					<key>include</key>
 					<string>#string_double</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#css_function</string>
 				</dict>
 				<dict>
 					<key>include</key>
