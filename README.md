@@ -1,3 +1,6 @@
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+THIS PROJECT IS NO LONGER MAINTAINED
+
 Copyright (c) 2010, Justin Donaldson and The haXe Project Contributors
 All rights reserved.
 Redistribution and use in source and binary forms, with or without
@@ -23,4 +26,4 @@ DAMAGE.
 
 The HaXe Textmate Bundle.
 
-Documentation provided "on the haXe wiki":http://haxe.org/com/ide/textmate/sugar_hx_textmate.
+Documentation provided [on the haXe wiki]:(http://haxe.org/com/ide/textmate/sugar_hx_textmate).
